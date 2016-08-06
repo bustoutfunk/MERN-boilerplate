@@ -5,6 +5,26 @@ var User = db.Model.extend({
   idAttribute: 'id'
 });
 
+var Log = db.Model.extend({
+  tableName: 'logs'
+});
+
+var Servicer = db.Model.extend({
+  tableName: 'servicers'
+});
+
+var WellData = db.Model.extend({
+  tableName: 'wellData'
+});
+
+var Well = db.Model.extend({
+  tableName: 'wells'
+});
+
 module.exports = {
-  User: User
+  User: User,
+  Log: Log,
+  Servicer: Servicer,
+  WellData: WellData,
+  Well: Well
 }

@@ -13,4 +13,10 @@ var knex = require('knex')({
 
 var bookshelf = require('bookshelf')(knex);
 
-module.exports = bookshelf;
+// Create Tables
+//require('./migrate.js').create()
+
+module.exports = {
+  db: bookshelf,
+  knex: knex
+}

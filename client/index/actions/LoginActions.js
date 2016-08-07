@@ -10,7 +10,7 @@ module.exports = {
     return function(dispatch){
       var promise = $.ajax({
         method: 'POST',
-        url: '/users',
+        url: '/api/users',
         data: model
       });
 

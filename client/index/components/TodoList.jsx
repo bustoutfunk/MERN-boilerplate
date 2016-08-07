@@ -8,6 +8,7 @@ var connect = require('react-redux').connect;
 var _ = require('underscore');
 
 var TodoActions = require('../actions/TodoActions.js');
+var LoginActions = require('../actions/LoginActions.js');
 
 var TodoItem = require('./TodoItem.jsx');
 
@@ -42,6 +43,7 @@ var TodoList = React.createClass({
 
     return (
       <div>
+        <button onClick={this._logout}> Logout </button>
         <label> Add Task </label>
         <br />
         <input ref="task_input" type="text" placeholder="Task Name..." />
@@ -50,6 +52,10 @@ var TodoList = React.createClass({
         {todoList}
       </div>
     );
+  },
+
+  _logout: function(){
+    LoginActions.logout()(this.props.dispatch);
   }
 });
 

@@ -12,14 +12,33 @@ var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var compiler = webpack(webpackConfig);
 
-var routes = require('./routes/index');
-var users = require('./routes/api/users');
-
 var app = express();
+var knex = require('./server/db').knex;
+var KnexSessionStore = require('connect-session-knex')(session);
 
 //============ VIEW ===========
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+//============ EXPRESS ============
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat', 
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 //1 Hour
+  },
+  store: new KnexSessionStore({knex: knex})
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
 
 //============ PASSPORT ============
 var Model = require('./server/model');
@@ -88,21 +107,6 @@ function(username, password, done){
   })
 }))
 
-//============ EXPRESS ============
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat', 
-  saveUninitialized: false, 
-  resave: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
 
 //Session-persisted Message Middleware
 app.use(function(req, res, next){
@@ -131,9 +135,10 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 //API Routes
-app.use('/', routes);
-app.use('/users', users);
-app.use('*', routes);
+var index = require('./routes/index');
+app.use('/', index);
+app.use('/api/users', require('./routes/api/users'));
+app.use('*', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

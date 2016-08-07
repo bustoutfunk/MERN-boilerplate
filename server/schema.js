@@ -54,9 +54,9 @@ var Schema = {
     well_id: {type: 'integer', nullable: false, unsigned: true},
     record_at: {type: 'dateTime', nullable: false},
     mac_address: {type: 'string', nullable: false},
-    stat1: {type: 'boolean', nullable: false}, //Debugging
-    stat2: {type: 'boolean', nullable: false}, //Debugging
-    pg: {type: 'boolean', nullable: false}, //Debugging
+    stat1: {type: 'string', nullable: false}, //Debugging
+    stat2: {type: 'string', nullable: false}, //Debugging
+    pg: {type: 'string', nullable: false}, //Debugging
     created_at: {type: 'dateTime', nullable: false},
     modified_at: {type: 'dateTime', nullable: true},
     send_push: {type: 'boolean', nullable: false}

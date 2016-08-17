@@ -13,6 +13,7 @@ var TodoList = require('./components/TodoList.jsx');
 
 var Login = require('./components/Login.jsx');
 var Signup = require('./components/Signup.jsx');
+var WellData = require('./components/WellData.jsx');
 
 var store = require('./createStore.js').store;
 var history = require('./createStore.js').history;
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/" component={IndexWrapper}>
         <IndexRoute component={Login} />
         <Route path="signup" component={Signup} />
+        <Route path="welldata" component={WellData} />
         <Route path="*" component={TodoList} />
       </Route>
     </Router>

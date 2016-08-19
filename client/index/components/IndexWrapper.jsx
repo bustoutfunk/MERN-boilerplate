@@ -4,7 +4,7 @@ var IndexWrapper = React.createClass({
   render: function(){
     return (
       <div>
-        <h1> Test App </h1>
+        <h1> WellSense </h1>
         {this.props.children}
       </div>
     );

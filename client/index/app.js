@@ -24,7 +24,10 @@ ReactDOM.render(
       <Route path="/" component={IndexWrapper}>
         <IndexRoute component={Login} />
         <Route path="signup" component={Signup} />
-        <Route path="welldata" component={WellData} />
+        <Route path="welldata"> 
+          <Route path=":type/:wellId" component={WellData} />
+          <Route path="*" component={WellData} />
+        </Route>
         <Route path="*" component={TodoList} />
       </Route>
     </Router>

@@ -14,7 +14,8 @@ var Servicer = db.Model.extend({
 });
 
 var WellData = db.Model.extend({
-  tableName: 'wellData'
+  tableName: 'wellData',
+  hasTimestamps: ['created_at']
 });
 
 var Well = db.Model.extend({

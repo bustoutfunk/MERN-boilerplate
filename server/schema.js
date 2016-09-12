@@ -16,7 +16,7 @@ var Schema = {
     record_date: {type: 'date', nullable: false},
     record_time: {type: 'time', nullable: false},
     created_at: {type: 'dateTime', nullable: false},
-    modified_at: {type: 'dateTime', nullable: true},
+    updated_at: {type: 'dateTime', nullable: true},
     device_token: {type: 'string', nullable: false}
   },
 
@@ -43,7 +43,7 @@ var Schema = {
     record_date: {type: 'date', nullable: false},
     record_time: {type: 'time', nullable: false},
     created_at: {type: 'dateTime', nullable: false},
-    modified_at: {type: 'dateTime', nullable: true}
+    updated_at: {type: 'dateTime', nullable: true}
   },
 
   wellData: {
@@ -58,7 +58,7 @@ var Schema = {
     stat2: {type: 'string', nullable: false}, //Debugging
     pg: {type: 'string', nullable: false}, //Debugging
     created_at: {type: 'dateTime', nullable: false},
-    modified_at: {type: 'dateTime', nullable: true},
+    updated_at: {type: 'dateTime', nullable: true},
     send_push: {type: 'boolean', nullable: false}
   },
 
@@ -72,7 +72,7 @@ var Schema = {
     location: {type: 'string', nullable: false},
     inletStatus: {type: 'boolean', nullable: false},
     created_at: {type: 'dateTime', nullable: false},
-    modified_at: {type: 'dateTime', nullable: true}
+    updated_at: {type: 'dateTime', nullable: true}
   }
 
 

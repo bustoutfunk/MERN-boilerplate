@@ -138,6 +138,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 var index = require('./routes/index');
 app.use('/', index);
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/well', require('./routes/api/well'));
 app.use('*', index);
 
 // catch 404 and forward to error handler

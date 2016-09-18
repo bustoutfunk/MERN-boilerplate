@@ -41,13 +41,14 @@ router.post('/data', function(req, res, next){
   // Find Well ID from the Mac Address
   Well.forge().fetch({mac_address: payload.mac_address})
   .then(function(wellInfo){
+    console.log(wellInfo);
     if(wellInfo.hasOwnProperty('well_id')){
       payload.well_id = wellInfo.well_id;
 
       return WellData.forge(payload).save();
     }
     else {
-      throw new Error("Well ID Property not found from Well Info entry with Mac Address " + mac_address);
+      throw new Error("Well ID Property not found from Well Info entry with Mac Address " + payload.mac_address);
     }
   })
   .then(function(wellData){

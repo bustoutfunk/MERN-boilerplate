@@ -39,7 +39,7 @@ router.post('/data', function(req, res, next){
   });
 
   // Find Well ID from the Mac Address
-  Well.forge().fetch({mac_address: payload.mac_address})
+  Well.forge().fetch({mac_address: payload.mac_address, require: true})
   .then(function(wellInfo){
     console.log(wellInfo);
     if(wellInfo.hasOwnProperty('id')){

@@ -42,8 +42,8 @@ router.post('/data', function(req, res, next){
   Well.forge().fetch({mac_address: payload.mac_address})
   .then(function(wellInfo){
     console.log(wellInfo);
-    if(wellInfo.hasOwnProperty('well_id')){
-      payload.well_id = wellInfo.well_id;
+    if(wellInfo.hasOwnProperty('id')){
+      payload.well_id = wellInfo.id;
 
       return WellData.forge(payload).save();
     }

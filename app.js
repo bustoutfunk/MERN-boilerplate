@@ -125,6 +125,7 @@ app.use(function(req, res, next){
   next(); 
 });
 
+/*
 //Webpack Hot Reloading
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -132,7 +133,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
   stats: {colors: true}
 }));
 app.use(require('webpack-hot-middleware')(compiler));
-
+*/
 
 //API Routes
 var index = require('./routes/index');

@@ -51,7 +51,7 @@ var Schema = {
     level: {type: 'string', nullable: false}, //H, M, L, C
     battery: {type: 'float', nullable: false},
     temp: {type: 'float', nullable: false},
-    well_id: {type: 'integer', nullable: false, unsigned: true},
+    well_id: {type: 'integer', nullable: true, unsigned: true}, //Set Nullable false
     record_at: {type: 'dateTime', nullable: false},
     mac_address: {type: 'string', nullable: false},
     stat1: {type: 'string', nullable: false}, //Debugging
@@ -59,7 +59,7 @@ var Schema = {
     pg: {type: 'string', nullable: false}, //Debugging
     created_at: {type: 'dateTime', nullable: false},
     updated_at: {type: 'dateTime', nullable: true},
-    send_push: {type: 'boolean', nullable: false}
+    send_push: {type: 'boolean', nullable: true}
   },
 
   wells: {

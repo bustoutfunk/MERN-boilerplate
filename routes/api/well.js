@@ -4,6 +4,7 @@ var router = express.Router();
 var _ = require('underscore');
 
 var WellData = require('../../server/model').WellData;
+var Well = require('../../server/model').Well;
 
 router.get('/data', function(req, res, next){
   WellData.forge().fetchAll()
@@ -37,7 +38,18 @@ router.post('/data', function(req, res, next){
     }
   });
 
-  WellData.forge(payload).save()
+  // Find Well ID from the Mac Address
+  Well.forge().fetch({mac_address: payload.mac_address})
+  .then(function(wellInfo){
+    if(wellInfo.hasOwnProperty('well_id')){
+      payload.well_id = wellInfo.well_id;
+
+      return WellData.forge(payload).save();
+    }
+    else {
+      throw new Error("Well ID Property not found from Well Info entry with Mac Address " + mac_address);
+    }
+  })
   .then(function(wellData){
     res.status(200).send({
       success: true,

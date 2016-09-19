@@ -33,15 +33,45 @@ router.post('/data', function(req, res, next){
     else {
       res.status(200).send({
         success: false,
-        msg: "Invalid Request Body"
+        msg: "Invalid Request Body! Missing Property " + prop
       });
     }
   });
 
+  // Request Body Checking
+  if(!['H', 'M', 'L', 'C'].contains(payload.level)){
+    res.status(200).send({
+      success: false,
+      msg: "Property Level has an invalid value (Can only be H, M, L, C)"
+    });
+  }
+  else if(payload.battery < 0 || payload.battery > 100){
+    res.status(200).send({
+      success: false,
+      msg: "Invalid Battery Value (0-100 only)"
+    });
+  }
+  else if(payload.temp < 0 || payload.temp > 200){
+    res.status(200).send({
+      success: false,
+      msg: "Invalid Temperature Value (0-200 only)"
+    });
+  }
+  else if(stat1 != 1 || stat1 != 0 || stat2 != 1 || stat2 != 0 || pg != 1 || pg != 0) {
+    res.status(200).send({
+      success: false,
+      msg: "Invalid stat1, stat2, pg values"
+    });
+  }
+
+
   // Find Well ID from the Mac Address
-  Well.forge().fetch({mac_address: payload.mac_address, require: true})
+  Well.forge({mac_address: payload.mac_address}).fetch()
   .then(function(wellInfo){
-    console.log(wellInfo);
+    if(!wellInfo) {
+      throw new Error("Well Info not found for Mac Address " + payload.mac_address);
+    }
+
     if(wellInfo.hasOwnProperty('id')){
       payload.well_id = wellInfo.id;
 

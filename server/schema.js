@@ -3,6 +3,7 @@ var Schema = {
     id: {type: 'increments', nullable: false, primary: true},
     username: {type: 'string', maxlength: 20, nullable: false, unique: true},
     password: {type: 'string', maxlength: 150, nullable: false},
+    /*
     first_name: {type: 'string', nullable: false},
     last_name: {type: 'string', nullable: false},
     address1: {type: 'string', nullable: false},
@@ -18,6 +19,7 @@ var Schema = {
     created_at: {type: 'dateTime', nullable: false},
     updated_at: {type: 'dateTime', nullable: true},
     device_token: {type: 'string', nullable: false}
+    */
   },
 
   logs: {

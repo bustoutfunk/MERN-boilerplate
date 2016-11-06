@@ -13,6 +13,7 @@ module.exports = function(req, res, next){
   .then(function(response){
     res.status(200).send({
       success: true,
+      userId: response.userId,
       redirectTo: response.redirectTo
     })
   })
@@ -49,7 +50,7 @@ var login = function(user, req, res, next){
   return new Promise(function(resolve, reject){
     req.logIn(user, function(err){
       if(!err)
-        resolve({redirectTo: '/test'});
+        resolve({userId: user.id, redirectTo: '/test'});
       else 
         reject(err.message);
     });

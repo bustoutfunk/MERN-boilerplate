@@ -6,7 +6,23 @@ var _ = require('underscore');
 var WellData = require('../../server/model').WellData;
 var Well = require('../../server/model').Well;
 
-router.get('/data', function(req, res, next){
+router.get('/:userId', function(req, res){
+  Well.forge({user_id: req.params.userId}).fetchAll()
+  .then(function(wells){
+    res.status(200).send({
+      success: true,
+      data: wells
+    });
+  })
+  .catch(function(err){
+    res.status(200).send({
+      success: false,
+      data: err.toString()
+    });
+  });
+});
+
+router.get('/data', function(req, res){
   WellData.forge().fetchAll()
   .then(function(wellData){
     res.status(200).send({
@@ -19,7 +35,23 @@ router.get('/data', function(req, res, next){
       success: false,
       data: err.toString()
     });
+  });
+});
+
+router.get('/data/:id', function(req, res){
+  WellData.forge({well_id: req.params.id}).fetchAll()
+  .then(function(wellData){
+    res.status(200).send({
+      success: true,
+      data: wellData
+    });
   })
+  .catch(function(err){
+    res.status(200).send({
+      success: false,
+      data: err.toString()
+    })
+  });
 });
 
 router.post('/data', function(req, res, next){

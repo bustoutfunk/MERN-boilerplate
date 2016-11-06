@@ -2,8 +2,8 @@ module.exports = {
   development: {
     db: {
       host: 'localhost',
-      username: 'wellsense',
-      password: 'wellsense',
+      username: 'root',
+      password: '',
       name: 'wellsense',
     }
   },

@@ -6,20 +6,33 @@ var User = db.Model.extend({
 });
 
 var Log = db.Model.extend({
-  tableName: 'logs'
+  tableName: 'logs',
+  idAttribute: 'id'
 });
 
 var Servicer = db.Model.extend({
-  tableName: 'servicers'
+  tableName: 'servicers',
+  users: function() {
+    return this.belongsTo(User, 'user_id');
+  }
 });
 
 var WellData = db.Model.extend({
   tableName: 'wellData',
-  hasTimestamps: ['created_at']
+  hasTimestamps: ['created_at'],
+  wells: function() {
+    return this.belongsToMany(Well, 'well_id');
+  }
 });
 
 var Well = db.Model.extend({
-  tableName: 'wells'
+  tableName: 'wells',
+  users: function() {
+    return this.belongsTo(User, 'user_id');
+  },
+  servicers: function() {
+    return this.belongsTo(Servicer, 'installer_id');
+  }
 });
 
 module.exports = {
